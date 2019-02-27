@@ -1,4 +1,4 @@
-import {isAbsolute, turnIntoAbsolute, goThroughDirectory} from '../src/controller/path-controller'
+import {isAbsolute, turnIntoAbsolute, goThroughDirectory, isMdFile} from '../src/controller/path-controller'
 
 describe('isAbsolute', () => {
     it('debería ser una función', () => {
@@ -15,6 +15,9 @@ describe('turnIntoAbsolute', () => {
     it('debería ser una función', () => {
         expect(typeof turnIntoAbsolute).toBe('function')
     });
+    it('debería retornar un string', () => {
+        expect(typeof turnIntoAbsolute('bar/baz')).toBe('string')
+    });
     it('si ingreso ruta relativa debe devolver ruta absoluta', () => {
         expect(turnIntoAbsolute('bar/baz')).toBe('C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\bar\\baz')
     });
@@ -25,5 +28,16 @@ describe('turnIntoAbsolute', () => {
 describe('goThroughDirectory', () => {
     it('debería ser una función', () => {
         expect(typeof goThroughDirectory).toBe('function');
+    });
+    it('debería retornar un array de strings', () => {
+        expect(typeof goThroughDirectory('C:/foo/..')).toBe('object')
+    });
+});
+describe('isMdFile', () => {
+    it('debería ser una función', () => {
+        expect(typeof isMdFile).toBe('function')
+    });
+    it('debería retornar un array de strings', () => {
+        expect(typeof isMdFile(['//documents', 'C://users/laboratoria'])).toBe('object')
     });
 });

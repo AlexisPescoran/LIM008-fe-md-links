@@ -9,5 +9,11 @@ export const turnIntoAbsolute = (myPath) => {
 }
 
 export const goThroughDirectory = (myPath) => {
-    return myPath;
+    const arrayStringsPath = ['//documents', 'C://users/laboratoria']
+    return arrayStringsPath;
+}
+
+export const isMdFile = (arrStrings) => {
+    const arrayStringsPathMd = ['//documents', 'C://users/laboratoria']
+    return arrayStringsPathMd;
 }
