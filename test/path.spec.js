@@ -1,4 +1,4 @@
-import {isAbsolute, turnIntoAbsolute, goThroughDirectory, isMdFile} from '../src/controller/path-controller'
+import {isAbsolute, turnIntoAbsolute, goThroughDirectory} from '../src/lib/path-lib'
 
 describe('isAbsolute', () => {
     it('debería ser una función', () => {
@@ -30,14 +30,9 @@ describe('goThroughDirectory', () => {
         expect(typeof goThroughDirectory).toBe('function');
     });
     it('debería retornar un array de strings', () => {
-        expect(typeof goThroughDirectory('C:/foo/..')).toBe('object')
+        expect(typeof goThroughDirectory('./dir')).toBe('object')
     });
-});
-describe('isMdFile', () => {
-    it('debería ser una función', () => {
-        expect(typeof isMdFile).toBe('function')
-    });
-    it('debería retornar un array de strings', () => {
-        expect(typeof isMdFile(['//documents', 'C://users/laboratoria'])).toBe('object')
+    it('debería mostrar el array de strings de los archivos md', () => {
+        expect(goThroughDirectory('./dir')).toEqual([ 'archivo.md', 'prueba.md' ])
     });
 });

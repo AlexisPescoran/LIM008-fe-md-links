@@ -9,19 +9,23 @@ export const turnIntoAbsolute = (myPath) => {
     return path.resolve(myPath);
 }
 
-const arrayStringsPath = []; // esto no puede ir allí  
 export const goThroughDirectory = (myPath) => {
-    const stats = fs.statSync(myPath);
-    if(stats.isDirectory()){
-        //abrir el directorio y recorrer los hijos
-    }else {
-        //almacenar la ruta de archivo en un array
-        arrayStringsPath.push(myPath);
-    }    
-    //return arrayStringsPath;
-}
+    let arrayStringsPath = [];
+    const files = fs.readdirSync(myPath)
 
-export const isMdFile = (arrStrings) => {
-    const arrayStringsPathMd = ['//documents', 'C://users/laboratoria']
-    return arrayStringsPathMd;
+    files.forEach(file => {
+
+        let newPath = myPath + '/' + file        
+        let stats = fs.statSync(newPath);
+        if(stats.isDirectory()){
+            arrayStringsPath = arrayStringsPath.concat(goThroughDirectory(newPath));                      
+        }else {
+            console.log(file);
+            if(path.extname(file) === '.md'){
+                arrayStringsPath.push(file);
+            }           
+        }
+    });  
+    return arrayStringsPath;
 }
+console.log(goThroughDirectory('./dir'))
