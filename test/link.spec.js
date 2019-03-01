@@ -1,4 +1,4 @@
-import {getLinks, cutLinks} from '../src/controller/link-controler'
+import {getLinks, cutLinks} from '../src/lib/link-lib'
 
 const arrObject = [{}, {}, {}];
 describe('getLinks', () => {
