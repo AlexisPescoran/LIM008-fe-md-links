@@ -22,7 +22,7 @@ export const goThroughDirectory = (myPath) => {
         }else {
             console.log(file);
             if(path.extname(file) === '.md'){
-                arrayStringsPath.push(file);
+                arrayStringsPath.push(newPath);
             }           
         }
     });  

@@ -22,3 +22,4 @@ export const cutLinks = (arrayObjetsLinks) => {
     return arrayObjetsLinksModified;
 }
 
+// console.log(getLinks());

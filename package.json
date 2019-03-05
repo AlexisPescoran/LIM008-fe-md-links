@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": {
     "eslint": "eslint --ext .js src/ test/",
+    "build": "babel src -d lib",
     "test": "jest --coverage"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "install": "^0.12.2",
+    "marked": "^0.6.1",
     "npm": "^6.8.0"
   }
 }
