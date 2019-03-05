@@ -1,22 +1,27 @@
-import {getLinks, cutLinks} from '../src/lib/link-lib'
+import {getLinks} from '../src/lib/link-lib'
 
-const arrObject = [{}, {}, {}];
+const arrObject = [ 
+    { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
+      text: 'Marked Documentation',
+      file: './dir/abc/archivo.md' },
+    { href: 'https://github.com/markedjs/marked',
+      text: 'Marked Js Github',
+      file: './dir/abc/archivo.md' },
+    { href: 'https://babeljs.io/setup#installation',
+      text: 'Instalación Babel',
+      file: './dir/prueba.md' },
+    { href: 'https://www.laboratoria.la/',
+      text: 'Laboratoria',
+      file: './dir/prueba.md' } ]
+
 describe('getLinks', () => {
     it('debería ser una función', () => {
         expect(typeof getLinks).toBe('function')
     });
     it('debería retornar un array de objetos', () => {
-        expect(typeof getLinks(['//documents', 'C://users/laboratoria'])).toBe('object')
+        expect(typeof getLinks(['./dir/abc/archivo.md', './dir/prueba.md'])).toBe('object')
     });
-});
-describe('cutLinks', () => {
-    it('debería ser una función', () => {
-        expect(typeof cutLinks).toBe('function')
-    });
-    it('debería retornar el array de objetos modificado', () => {
-        expect(typeof cutLinks([{}, {}, {}])).toBe('object')
-    });
-    it('no debería modificar el tamaño del array', () => {
-        expect(arrObject.length).toBe(3)
-    });
+    it('debería retornar un array de objetos con href, text y file', () => {
+        expect(getLinks(['./dir/abc/archivo.md', './dir/prueba.md'])).toEqual(arrObject)
+    })
 });
