@@ -20,7 +20,6 @@ export const goThroughDirectory = (myPath) => {
         if(stats.isDirectory()){
             arrayStringsPath = arrayStringsPath.concat(goThroughDirectory(newPath));                      
         }else {
-            console.log(file);
             if(path.extname(file) === '.md'){
                 arrayStringsPath.push(newPath);
             }           
