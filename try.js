@@ -114,54 +114,57 @@ const validateLink = (obj) => {
 
 validateLink(pruebaObjeto); */
 
-const validateLink = (obj) => new Promise((resolve, reject) => {
-    console.log('Pendiente...')
-    // const links = obj.map((link) => link.href)
-    console.log(obj)
-    const promises = obj.map((link) => validate(link)); 
-    console.log(promises)
-    resolve(Promise.all(promises)).then(res => {
-        resolve(res)
-    })
-});
+// const validate = (link) => {
+//     return fetch(link.href)
+//       .then(response => {
+//         if (response.status >= 200 && response.status < 400) {
+//           link.status = response.status;
+//           link.statusText = 'Ok';
+//           return link;
+//         } else {
+//           link.status = response.status;
+//           link.statusText = 'Fail';
+//           return link;
+//         }
+//       }).catch(error => {
+//           link.status = ''
+//           link.statusText = 'Fail'
 
-const validate = (link) => new Promise((resolve, reject) => {
+//           return link;
+//       })
+//   }
+
+const validateLink = (arrObj) => {
+    console.log('Pendiente...')
+    const promises = arrObj.map((link) => {
     return fetch(link.href)
       .then(response => {
         if (response.status >= 200 && response.status < 400) {
           link.status = response.status;
-          link.value = 'OK';
-          resolve(link);
+          link.statusText = 'Ok';
+          return link;
         } else {
           link.status = response.status;
-          link.value = 'Fail';
-          resolve(link);
+          link.statusText = 'Fail';
+          return link;
         }
-      }).catch(err => {
-        err.code = 404;
-        err.message = 'Fail';
-        link.status = err.code;
-        link.value = err.message;
-        resolve(link);
-      });
-  });
-
-/*const validate = (link) => {
-    fetch(link)
-    .then(response => {
-        const links = arrayLinks.map((objAnswer, statuslink) => {
-          objAnswer.status = response[statuslink].status;
-          objAnswer.statusText = response[statuslink].statusText;
-          return objAnswer;
-        });
-        return links;
-      })    
-}*/
+      }).catch(error => {
+          link.status = ''
+          link.statusText = 'Fail'
+          return link;
+      })
+    });     
+   return Promise.all(promises)
+}
 
 
 
+  /*const validate = (link) => {
+      return link.href.concat('prueba');
+  }*/
 
 
-validateLink(pruebaObjeto);
+
+validateLink(pruebaObjeto).then((res)=> console.log(res))
 
 
