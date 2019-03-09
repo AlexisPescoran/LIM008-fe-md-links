@@ -7,11 +7,17 @@ const arrObject = [
     { href: 'https://github.com/markedjs/marked',
       text: 'Marked Js Github',
       file: './dir/abc/archivo.md' },
+    { href: 'https://nodeschooio/s/',
+      text: 'Not Found Nodeschool',
+      file: './dir/abc/archivo.md' },
     { href: 'https://babeljs.io/setup#installation',
       text: 'Instalación Babel',
       file: './dir/prueba.md' },
     { href: 'https://www.laboratoria.la/',
       text: 'Laboratoria',
+      file: './dir/prueba.md' },
+    { href: 'https://nodeschool.io/s/',
+      text: 'Nodeschool 404',
       file: './dir/prueba.md' } ]
 
 describe('getLinks', () => {

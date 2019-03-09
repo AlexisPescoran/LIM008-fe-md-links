@@ -63,14 +63,14 @@ const links = pruebaObjeto.map((link) => link.href)
 // }
 // ));
 
-/*
-fetch('http://www.youtube.com')
+
+fetch('https://www.megaupload.com')
 .then(res => {
     console.log(`probando qué devuelve el res ${res} `); 
     console.log(`probando qué devuelve el Status ${res.status} `);      
     console.log(`probando qué devuelve el statusText ${res.statusText} `);
 })
-.catch(console.error)*/
+.catch(console.error)
 
 
 const pruebaObjeto = getLinks(goThroughDirectory('./dir'));
@@ -134,6 +134,7 @@ validateLink(pruebaObjeto); */
 //       })
 //   }
 
+
 const validateLink = (arrObj) => {
     console.log('Pendiente...')
     const promises = arrObj.map((link) => {
@@ -155,7 +156,7 @@ const validateLink = (arrObj) => {
       })
     });     
    return Promise.all(promises)
-}
+} 
 
 
 

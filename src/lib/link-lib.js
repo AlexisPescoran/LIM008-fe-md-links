@@ -1,7 +1,6 @@
-const path = require('path');
 const fs = require('fs');
 const myMarked = require('marked')
-const linCheck = require('link-check')
+
 
 export const getLinks = (arrayStringsPathMd) => {    
     const arrayObjetsLinks = [];
