@@ -63,14 +63,14 @@ const links = pruebaObjeto.map((link) => link.href)
 // }
 // ));
 
-
+/*
 fetch('https://www.megaupload.com')
 .then(res => {
     console.log(`probando qué devuelve el res ${res} `); 
     console.log(`probando qué devuelve el Status ${res.status} `);      
     console.log(`probando qué devuelve el statusText ${res.statusText} `);
 })
-.catch(console.error)
+.catch(console.error)*/
 
 
 const pruebaObjeto = getLinks(goThroughDirectory('./test/dir'));
@@ -168,7 +168,16 @@ const validateLink = (arrObj) => {
 
 
 
-validateLink(pruebaObjeto).then((res)=> console.log(res))
+// validateLink(pruebaObjeto).then((res)=> console.log(res))
 
+
+const statsLinks = (arrObj) => {
+    const objeto = {};
+    objeto.total = arrObj.length,
+    objeto.unique = new Set(arrObj.map(({ href }) => href)).size
+    return objeto;
+}
+
+console.log(statsLinks(pruebaObjeto))
 
 

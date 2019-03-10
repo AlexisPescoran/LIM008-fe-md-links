@@ -24,8 +24,8 @@ export const validateLinks = (arrObj) => {
 }
 
 export const statsLinks = (arrObj) => {
-  const objeto = {};
-  objeto.total = 0
-  objeto.unique = 0
-  return objeto; 
+  const statsObject = {};
+  statsObject.total = arrObj.length
+  statsObject.unique = new Set(arrObj.map(({ href }) => href)).size
+  return statsObject; 
 }

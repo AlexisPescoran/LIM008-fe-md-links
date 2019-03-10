@@ -27,7 +27,23 @@ const arrObject2 = [
   { href: 'https://github.com/markedjs/marked',
     text: 'Marked Js Github',
     file: './test/dir/abc/archivo.md' } ]
+
+const arrObject3 = [
+  { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
+      text: 'Marked Documentation',
+      file: './test/dir/abc/archivo.md' },
+  { href: 'https://github.com/markedjs/marked',
+      text: 'Marked Js Github',
+      file: './test/dir/abc/archivo.md' },
+  { href: 'https://nodeschooio/s/',
+      text: 'Not Found Nodeschool',
+      file: './test/dir/abc/archivo.md' },
+  { href: 'https://nodeschooio/s/',
+      text: 'Not Found Nodeschool',
+      file: './test/dir/abc/archivo.md' } ]
+
       
+
 const arrObjectOutput = [ 
   { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
     text: 'Marked Documentation',
@@ -72,6 +88,11 @@ const arrObjectOutput2 = [
     status: 200,
     statusText: 'Ok' } ]
 
+const statsObject = {
+  total: 4,
+  unique: 3
+}
+
 
 describe('validateLinks', () => {
     it('debería ser una función', () => {
@@ -101,7 +122,10 @@ describe('statsLinks', () => {
   it('debería ser una función', () => {
     expect(typeof statsLinks).toBe('function')
   })
-  it.only('debería retornarme un objeto stats con las propiedades total: y unique:', () => {
+  it('debería retornarme un objeto de stats con las propiedades total: y unique:', () => {
     expect(typeof statsLinks([{},{}])).toEqual('object')
-  })  
+  }) 
+  it('debería retornar un objeto de stats con la propiedad total: 4 y unique: 3', () => {
+    expect(statsLinks(arrObject3)).toEqual(statsObject)
+  }) 
 })
