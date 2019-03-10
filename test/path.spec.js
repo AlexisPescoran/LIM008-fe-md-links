@@ -30,9 +30,9 @@ describe('goThroughDirectory', () => {
         expect(typeof goThroughDirectory).toBe('function');
     });
     it('debería retornar un array de strings', () => {
-        expect(typeof goThroughDirectory('./dir')).toBe('object')
+        expect(typeof goThroughDirectory('./test/dir')).toBe('object')
     });
     it('debería mostrar el array de strings con las rutas de los archivos md', () => {
-        expect(goThroughDirectory('./dir')).toEqual(['./dir/abc/archivo.md', './dir/prueba.md'])
+        expect(goThroughDirectory('./test/dir')).toEqual(['./test/dir/abc/archivo.md', './test/dir/prueba.md'])
     });
 });

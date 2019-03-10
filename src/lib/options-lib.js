@@ -22,3 +22,10 @@ export const validateLinks = (arrObj) => {
     });     
    return Promise.all(promises)
 }
+
+export const statsLinks = (arrObj) => {
+  const objeto = {};
+  objeto.total = 0
+  objeto.unique = 0
+  return objeto; 
+}

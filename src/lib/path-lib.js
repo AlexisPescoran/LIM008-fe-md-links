@@ -27,4 +27,3 @@ export const goThroughDirectory = (myPath) => {
     });  
     return arrayStringsPath;
 }
-console.log(goThroughDirectory('./dir'))

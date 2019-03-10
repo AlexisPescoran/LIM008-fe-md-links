@@ -73,7 +73,9 @@ fetch('https://www.megaupload.com')
 .catch(console.error)
 
 
-const pruebaObjeto = getLinks(goThroughDirectory('./dir'));
+const pruebaObjeto = getLinks(goThroughDirectory('./test/dir'));
+
+
 // console.log(pruebaObjeto);
 
 /* Me devuelve la promesa del fetch 
@@ -167,5 +169,6 @@ const validateLink = (arrObj) => {
 
 
 validateLink(pruebaObjeto).then((res)=> console.log(res))
+
 
 
