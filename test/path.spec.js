@@ -1,4 +1,4 @@
-import {isAbsolute, turnIntoAbsolute, goThroughDirectory} from '../src/lib/path-lib'
+import {isAbsolute, turnIntoAbsolute, goThroughDirectory, isFile} from '../src/lib/path-lib'
 
 describe('isAbsolute', () => {
     it('debería ser una función', () => {
@@ -11,6 +11,7 @@ describe('isAbsolute', () => {
         expect(isAbsolute('fool/')).toBe(false)
     });
 });
+
 describe('turnIntoAbsolute', () => {
     it('debería ser una función', () => {
         expect(typeof turnIntoAbsolute).toBe('function')
@@ -25,9 +26,25 @@ describe('turnIntoAbsolute', () => {
         expect(turnIntoAbsolute('C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\bar\\baz')).toBe('C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\bar\\baz')
     });
 });
+
+describe('isFile', () => {
+    it('debería ser una función', () => {
+        expect(typeof isFile).toBe('function')
+    })
+    it('debería retornar un array de string', () => {
+        expect(typeof isFile('./test/abc.md')).toBe('object')
+    })
+    it('debería retornar un array de string con la ruta del archivo', () => {
+        expect(isFile('./test/abc.md')).toEqual(['./test/abc.md'])
+    })
+    it('debería retornar un array vacío si se ingresa como argumento un directorio', () => {
+        expect(isFile('./test/dir')).toEqual([])
+    })
+})
+
 describe('goThroughDirectory', () => {
     it('debería ser una función', () => {
-        expect(typeof goThroughDirectory).toBe('function');
+        expect(typeof goThroughDirectory).toBe('function')
     });
     it('debería retornar un array de strings', () => {
         expect(typeof goThroughDirectory('./test/dir')).toBe('object')

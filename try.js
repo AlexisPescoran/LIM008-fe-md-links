@@ -6,39 +6,46 @@ const fetch = require('node-fetch')
 const goThroughDirectory = (myPath) => {
     let arrayStringsPath = [];
     const files = fs.readdirSync(myPath)
+       
+        files.forEach(file => {
 
-    files.forEach(file => {
-
-        let newPath = myPath + '/' + file        
-        let stats = fs.statSync(newPath);
-        if(stats.isDirectory()){
-            arrayStringsPath = arrayStringsPath.concat(goThroughDirectory(newPath));                      
-        }else {            
-            if(path.extname(file) === '.md'){
-                arrayStringsPath.push(newPath);
-            }           
-        }
-    });  
-    return arrayStringsPath;
+            let newPath = myPath + '/' + file  
+            let stats = fs.statSync(newPath);
+            
+            if(stats.isDirectory()){
+                arrayStringsPath = arrayStringsPath.concat(goThroughDirectory(newPath));                      
+            }else {            
+                if(path.extname(file) === '.md'){
+                    arrayStringsPath.push(newPath);
+                }           
+            }
+        });
+     
+    return arrayStringsPath
 }
-// console.log(goThroughDirectory('./dir'))
+// console.log(goThroughDirectory('./test/dir'))
 
-const getLinks = (arrayStringsPathMd) => {    
+const getLinks = (arrayStringsPathMd) => {   
+    
     const arrayObjetsLinks = [];
+    const renderer = new myMarked.Renderer();
 
     arrayStringsPathMd.forEach(ele => {
-        const fileContent = fs.readFileSync(ele, 'utf8');        
-        const renderer = new myMarked.Renderer();
 
-        renderer.link = (href, title, text) => { 
-            arrayObjetsLinks.push({href: href.slice(0,51), text, file: ele}) };
-
-        myMarked(fileContent, {renderer});
-        
-    });
+            const fileContent = fs.readFileSync(ele, 'utf8');        
+    
+            renderer.link = (href, title, text) => { 
+                arrayObjetsLinks.push({href: href.slice(0,51), text, file: ele}) };
+    
+            myMarked(fileContent, {renderer});
+            
+        });    
+    
     return arrayObjetsLinks;
 }
-// console.log(getLinks(goThroughDirectory('./dir')));
+
+console.log(getLinks(['./test/dir/abc/archivo.md', './test/dir/prueba.md' ]))
+// console.log(getLinks(goThroughDirectory('./test/dir')));
 
 //Para mapear el link
 
@@ -73,7 +80,7 @@ fetch('https://www.megaupload.com')
 .catch(console.error)*/
 
 
-const pruebaObjeto = getLinks(goThroughDirectory('./test/dir'));
+// const pruebaObjeto = getLinks(goThroughDirectory('./test/dir'));
 
 
 // console.log(pruebaObjeto);
@@ -136,7 +143,7 @@ validateLink(pruebaObjeto); */
 //       })
 //   }
 
-
+/*
 const validateLink = (arrObj) => {
     console.log('Pendiente...')
     const promises = arrObj.map((link) => {
@@ -159,7 +166,7 @@ const validateLink = (arrObj) => {
     });     
    return Promise.all(promises)
 } 
-
+*/
 
 
   /*const validate = (link) => {
@@ -170,14 +177,72 @@ const validateLink = (arrObj) => {
 
 // validateLink(pruebaObjeto).then((res)=> console.log(res))
 
-
+/*
 const statsLinks = (arrObj) => {
-    const objeto = {};
-    objeto.total = arrObj.length,
-    objeto.unique = new Set(arrObj.map(({ href }) => href)).size
-    return objeto;
+    return {
+        total: arrObj.length,
+        unique: new Set(arrObj.map(({ href }) => href)).size
+
+    }    
 }
 
-console.log(statsLinks(pruebaObjeto))
+console.log(statsLinks(pruebaObjeto)) */
 
 
+/*
+const validateStats = (arrObj) => {
+    return validateLink(pruebaObjeto)
+    .then((res) => {
+        const brokens = res.filter(link => link.statusText === 'Fail').length  
+        return {
+            total: arrObj.length,
+            unique: new Set(arrObj.map(({ href }) => href)).size,
+            broken: brokens
+        }             
+      });         
+  }
+
+
+
+validateStats(pruebaObjeto).then(ele => console.log(ele)) */
+
+// const h = validateLink(pruebaObjeto)
+// .then((res) => {
+//     return res.filter(link => link.statusText === 'Fail').length    
+//   });
+
+// console.log(h.then((res)=>console.log(res)))
+
+
+// validateLink(pruebaObjeto)
+// .then((res) => {
+//     const h = res.filter(link => link.statusText === 'Fail').length   
+//     console.log(h)
+//     return h     
+//   });
+// Para saber si es ruta de un archivo
+const isFile = (myPath) => {
+    let arrayStringsPath = [];
+    const stats = fs.statSync(myPath)
+
+    if(stats.isFile && path.extname(myPath) === '.md'){        
+        arrayStringsPath.push(myPath);
+    }   
+    return arrayStringsPath;
+}
+
+//Si el archivo no es md
+const x = isFile('./package.json')
+console.log(x)
+console.log(x.length)
+console.log(getLinks(x));
+
+//Si el archivo sí es md
+
+const y = isFile('./test/abc.md')
+console.log(y)
+console.log(y.length)
+console.log(getLinks(y));
+
+/*file = path.extname('./ABC/README.md')
+console.log(file)*/

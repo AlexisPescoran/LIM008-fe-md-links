@@ -12,6 +12,9 @@ const arrObject = [
       file: './test/dir/abc/archivo.md' },
     { href: 'https://babeljs.io/setup#installation',
       text: 'Instalación Babel',
+      file: './test/dir/abc/archivo.md' },
+    { href: 'https://babeljs.io/setup#installation',
+      text: 'Instalación Babel',
       file: './test/dir/prueba.md' },
     { href: 'https://www.laboratoria.la/',
       text: 'Laboratoria',
@@ -26,7 +29,7 @@ describe('getLinks', () => {
     });
     it('debería retornar un array de objetos', () => {
         expect(typeof getLinks(['./test/dir/abc/archivo.md', './test/dir/prueba.md' ])).toBe('object')
-    });
+    })
     it('debería retornar un array de objetos con href, text y file', () => {
         expect(getLinks(['./test/dir/abc/archivo.md', './test/dir/prueba.md' ])).toEqual(arrObject)
     })

@@ -29,3 +29,15 @@ export const statsLinks = (arrObj) => {
   statsObject.unique = new Set(arrObj.map(({ href }) => href)).size
   return statsObject; 
 }
+
+export const validateStats = (arrObj) => {
+  return validateLinks(arrObj)
+    .then((res) => {
+        const brokens = res.filter(link => link.statusText === 'Fail').length  
+        return {
+            total: arrObj.length,
+            unique: new Set(arrObj.map(({ href }) => href)).size,
+            broken: brokens
+        }             
+      }); 
+}
