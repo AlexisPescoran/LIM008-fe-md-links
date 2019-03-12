@@ -1,4 +1,4 @@
-import {validateLinks, statsLinks, validateStats} from '../src/lib/options-lib'
+import {validateLinks, statsLinks, validateStats} from '../src/options-lib'
 
 const arrObject = [ 
     { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
@@ -135,14 +135,14 @@ describe('statsLinks', () => {
   }) 
 })
 
-describe.only('validateStats', () => {
+describe('validateStats', () => {
   it('debería ser una función', () => {
     expect(typeof validateStats).toBe('function')
   })
   it('debería retornar un objeto de stats con las propiedades total, unique y broken', () => {
     expect(typeof validateStats([{},{}])).toBe('object')
   })
-  it.only('debería retornar un objeto de validate&stats con la propiedad total:4, unique:3 y broken:2', (done) => {
+  it('debería retornar un objeto de validate&stats con la propiedad total:4, unique:3 y broken:2', (done) => {
     return validateStats(arrObject3)
     .then((res) => {
       expect(res).toEqual(validateStatsObject)

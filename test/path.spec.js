@@ -1,4 +1,4 @@
-import {isAbsolute, turnIntoAbsolute, goThroughDirectory, isFile} from '../src/lib/path-lib'
+import {isAbsolute, turnIntoAbsolute, goThroughDirectory, isFile} from '../src/path-lib'
 
 describe('isAbsolute', () => {
     it('debería ser una función', () => {

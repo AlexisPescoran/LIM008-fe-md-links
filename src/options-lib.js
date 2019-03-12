@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
 
 export const validateLinks = (arrObj) => {
-    console.log('Pendiente...')
     const promises = arrObj.map((link) => {
     return fetch(link.href)
       .then(response => {

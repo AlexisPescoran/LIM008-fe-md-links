@@ -1,4 +1,4 @@
-import {getLinks} from '../src/lib/link-lib'
+import {getLinks} from '../src/link-lib'
 
 const arrObject = [ 
     { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
