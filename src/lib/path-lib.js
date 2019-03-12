@@ -13,7 +13,7 @@ export const isFile = (myPath) => {
     let arrayStringsPath = [];
     const stats = fs.statSync(myPath)
 
-    if(stats.isFile && path.extname(myPath) === '.md'){        
+    if(stats.isFile() && path.extname(myPath) === '.md'){        
         arrayStringsPath.push(myPath);
     }  else {
         return arrayStringsPath;

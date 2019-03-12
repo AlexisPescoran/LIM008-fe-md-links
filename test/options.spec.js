@@ -135,17 +135,18 @@ describe('statsLinks', () => {
   }) 
 })
 
-describe('validateStats', () => {
+describe.only('validateStats', () => {
   it('debería ser una función', () => {
     expect(typeof validateStats).toBe('function')
   })
   it('debería retornar un objeto de stats con las propiedades total, unique y broken', () => {
     expect(typeof validateStats([{},{}])).toBe('object')
   })
-  it('debería retornar un objeto de validate&stats con la propiedad total:4, unique:3 y broken:2', () => {
+  it.only('debería retornar un objeto de validate&stats con la propiedad total:4, unique:3 y broken:2', (done) => {
     return validateStats(arrObject3)
     .then((res) => {
       expect(res).toEqual(validateStatsObject)
+      done()
     })
   })
 })
