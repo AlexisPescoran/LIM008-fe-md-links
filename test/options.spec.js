@@ -1,100 +1,52 @@
-import {validateLinks, statsLinks, validateStats} from '../src/options-lib'
-
-const arrObject = [ 
-    { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
-      text: 'Marked Documentation',
-      file: './test/dir/abc/archivo.md' },
-    { href: 'https://github.com/markedjs/marked',
-      text: 'Marked Js Github',
-      file: './test/dir/abc/archivo.md' },
-    { href: 'https://nodeschooio/s/',
-      text: 'Not Found Nodeschool',
-      file: './test/dir/abc/archivo.md' },  
-    { href: 'https://babeljs.io/setup#installation',
-      text: 'Instalación Babel',
-      file: './test/dir/prueba.md' },
-    { href: 'https://www.laboratoria.la/',
-      text: 'Laboratoria',
-      file: './test/dir/prueba.md' },
-    { href: 'https://nodeschool.io/s/',
-      text: 'Nodeschool 404',
-      file: './test/dir/prueba.md' } ]
-
-const arrObject2 = [
-    { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
-    text: 'Marked Documentation',
-    file: './test/dir/abc/archivo.md' },
-  { href: 'https://github.com/markedjs/marked',
-    text: 'Marked Js Github',
-    file: './test/dir/abc/archivo.md' } ]
-
-const arrObject3 = [
-  { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
-      text: 'Marked Documentation',
-      file: './test/dir/abc/archivo.md' },
-  { href: 'https://github.com/markedjs/marked',
-      text: 'Marked Js Github',
-      file: './test/dir/abc/archivo.md' },
-  { href: 'https://nodeschooio/s/',
-      text: 'Not Found Nodeschool',
-      file: './test/dir/abc/archivo.md' },
-  { href: 'https://nodeschooio/s/',
-      text: 'Not Found Nodeschool',
-      file: './test/dir/abc/archivo.md' } ]
-
-      
+import {validateLinks, validateStats} from '../src/options-lib'
 
 const arrObjectOutput = [ 
   { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
     text: 'Marked Documentation',
-    file: './test/dir/abc/archivo.md', 
     status: 200,
-    statusText: 'Ok'  },
+    statusText: 'Ok' },
   { href: 'https://github.com/markedjs/marked',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
     text: 'Marked Js Github',
-    file: './test/dir/abc/archivo.md',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://nodeschooio/s/',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
     text: 'Not Found Nodeschool',
-    file: './test/dir/abc/archivo.md',
     status: '',
     statusText: 'Fail' },
   { href: 'https://babeljs.io/setup#installation',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
     text: 'Instalación Babel',
-    file: './test/dir/prueba.md',
+    status: 200,
+    statusText: 'Ok' },
+  { href: 'https://babeljs.io/setup#installation',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
+    text: 'Instalación Babel',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://www.laboratoria.la/',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
     text: 'Laboratoria',
-    file: './test/dir/prueba.md',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://nodeschool.io/s/',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
     text: 'Nodeschool 404',
-    file: './test/dir/prueba.md',
     status: 404,
     statusText: 'Fail' } ]   
     
 const arrObjectOutput2 = [
-  { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
-    text: 'Marked Documentation',
-    file: './test/dir/abc/archivo.md', 
+  { href: 'https://www.laboratoria.la/',
+    text: 'Laboratoria',
+    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\abc.md', 
     status: 200,
-    statusText: 'Ok'  },
-  { href: 'https://github.com/markedjs/marked',
-    text: 'Marked Js Github',
-    file: './test/dir/abc/archivo.md',
-    status: 200,
-    statusText: 'Ok' } ]
+    statusText: 'Ok'  } ]
 
-const statsObject = {
-  total: 4,
-  unique: 3
-}
 const validateStatsObject = {
-  total: 4,
-  unique:3,
+  total: 7,
+  unique: 6,
   broken: 2
 }
 
@@ -104,36 +56,26 @@ describe('validateLinks', () => {
         expect(typeof validateLinks).toBe('function')
     })
     it('debería retornar un array de objetos', () => {
-        return validateLinks(arrObject)
+        return validateLinks('./test/dir')
         .then((res) => {
           expect(typeof res).toBe('object')
         }) 
     })
-    it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que no funcionan', () =>{
-        return validateLinks(arrObject)
+    it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que no funcionan', (done) =>{
+        return validateLinks('./test/dir')
         .then((res) => {
             expect(res).toEqual(arrObjectOutput)
+            done()
         })
     })
-    it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que sí funcionan', () => {
-        return validateLinks(arrObject2)
+    it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que sí funcionan', (done) => {
+        return validateLinks('./test/abc.md')
         .then((res) => {
             expect(res).toEqual(arrObjectOutput2)
+            done()
         })
     })
 });
-
-describe('statsLinks', () => {
-  it('debería ser una función', () => {
-    expect(typeof statsLinks).toBe('function')
-  })
-  it('debería retornar un objeto de stats con las propiedades total: y unique:', () => {
-    expect(typeof statsLinks([{},{}])).toEqual('object')
-  }) 
-  it('debería retornar un objeto de stats con la propiedad total: 4 y unique: 3', () => {
-    expect(statsLinks(arrObject3)).toEqual(statsObject)
-  }) 
-})
 
 describe('validateStats', () => {
   it('debería ser una función', () => {
@@ -142,11 +84,18 @@ describe('validateStats', () => {
   it('debería retornar un objeto de stats con las propiedades total, unique y broken', () => {
     expect(typeof validateStats([{},{}])).toBe('object')
   })
-  it('debería retornar un objeto de validate&stats con la propiedad total:4, unique:3 y broken:2', (done) => {
-    return validateStats(arrObject3)
+  it('debería retornar un objeto de validate&stats con la propiedad total:7, unique:6 y broken:2 con ruta de directorio', (done) => {
+    return validateLinks('./test/dir')
     .then((res) => {
-      expect(res).toEqual(validateStatsObject)
-      done()
+      expect(validateStats(res)).toEqual(validateStatsObject);
+      done();
+    })
+  })
+  it('debería retornar un objeto de validate&stats con la propiedad total:1, unique:1 y broken:0 con ruta de archivo', (done) => {
+    return validateLinks('./test/abc.md')
+    .then((res) => {
+      expect(validateStats(res)).toEqual({total: 1, unique: 1, broken: 0});
+      done();
     })
   })
 })
