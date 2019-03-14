@@ -1,12 +1,14 @@
 {
-  "name": "md-links",
+  "name": "alexis-md-links",
   "version": "1.0.0",
-  "description": "md-links @ Laboratoria",
-  "main": "src/index.html",
+  "description": "librería que permite extraer los links de uno o varios archivos markdown, también se puede vaidar los links",
+  "main": "lib/index.js",
   "keywords": [
     "javascript",
     "npm",
-    "jest"
+    "md-links",
+    "links",
+    "markdown"
   ],
   "license": "MIT",
   "bin": {
