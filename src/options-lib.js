@@ -1,6 +1,8 @@
+import {getLinks} from './link-lib'
 const fetch = require('node-fetch')
 
-export const validateLinks = (arrObj) => {
+export const validateLinks = (myPath) => {
+    const arrObj = getLinks(myPath)
     const promises = arrObj.map((link) => {
     return fetch(link.href)
       .then(response => {
@@ -22,21 +24,11 @@ export const validateLinks = (arrObj) => {
    return Promise.all(promises)
 }
 
-export const statsLinks = (arrObj) => {
-  const statsObject = {};
-  statsObject.total = arrObj.length
-  statsObject.unique = new Set(arrObj.map(({ href }) => href)).size
-  return statsObject; 
-}
-
-export const validateStats = (arrObj) => {
-  return validateLinks(arrObj)
-    .then((res) => {
-        const brokens = res.filter(link => link.statusText === 'Fail').length  
-        return {
-            total: arrObj.length,
-            unique: new Set(arrObj.map(({ href }) => href)).size,
-            broken: brokens
-        }             
-      }); 
+export const validateStats = (res) => {
+  const brokens = res.filter(link => link.statusText === 'Fail').length  
+  return {
+      total: res.length,
+      unique: new Set(res.map(({ href }) => href)).size,
+      broken: brokens
+  }    
 }
