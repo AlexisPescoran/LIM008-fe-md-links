@@ -2,37 +2,37 @@ import {validateLinks, validateStats} from '../src/options-lib'
 
 const arrObjectOutput = [ 
   { href: 'https://marked.js.org/#/CONTRIBUTING.md#test-early-',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
+    file: `${process.cwd()}\\test\\dir\\abc\\archivo.md`,
     text: 'Marked Documentation',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://github.com/markedjs/marked',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
+    file: `${process.cwd()}\\test\\dir\\abc\\archivo.md`,
     text: 'Marked Js Github',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://nodeschooio/s/',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
+    file: `${process.cwd()}\\test\\dir\\abc\\archivo.md`,
     text: 'Not Found Nodeschool',
     status: '',
     statusText: 'Fail' },
   { href: 'https://babeljs.io/setup#installation',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md',
+    file: `${process.cwd()}\\test\\dir\\abc\\archivo.md`,
     text: 'Instalación Babel',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://babeljs.io/setup#installation',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
+    file: `${process.cwd()}\\test\\dir\\prueba.md`,
     text: 'Instalación Babel',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://www.laboratoria.la/',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
+    file: `${process.cwd()}\\test\\dir\\prueba.md`,
     text: 'Laboratoria',
     status: 200,
     statusText: 'Ok' },
   { href: 'https://nodeschool.io/s/',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md',
+    file: `${process.cwd()}\\test\\dir\\prueba.md`,
     text: 'Nodeschool 404',
     status: 404,
     statusText: 'Fail' } ]   
@@ -40,7 +40,7 @@ const arrObjectOutput = [
 const arrObjectOutput2 = [
   { href: 'https://www.laboratoria.la/',
     text: 'Laboratoria',
-    file: 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\abc.md', 
+    file: `${process.cwd()}\\test\\abc.md`, 
     status: 200,
     statusText: 'Ok'  } ]
 
@@ -56,20 +56,20 @@ describe('validateLinks', () => {
         expect(typeof validateLinks).toBe('function')
     })
     it('debería retornar un array de objetos', () => {
-        return validateLinks('./test/dir')
+        return validateLinks(`${process.cwd()}\\test\\dir`)
         .then((res) => {
           expect(typeof res).toBe('object')
         }) 
     })
     it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que no funcionan', (done) =>{
-        return validateLinks('./test/dir')
+        return validateLinks(`${process.cwd()}\\test\\dir`)
         .then((res) => {
             expect(res).toEqual(arrObjectOutput)
             done()
         })
     })
     it('debería retornar un array de objetos con las propiedades status y statusText agregadas con links que sí funcionan', (done) => {
-        return validateLinks('./test/abc.md')
+        return validateLinks(`${process.cwd()}\\test\\abc.md`)
         .then((res) => {
             expect(res).toEqual(arrObjectOutput2)
             done()
@@ -85,14 +85,14 @@ describe('validateStats', () => {
     expect(typeof validateStats([{},{}])).toBe('object')
   })
   it('debería retornar un objeto de validate&stats con la propiedad total:7, unique:6 y broken:2 con ruta de directorio', (done) => {
-    return validateLinks('./test/dir')
+    return validateLinks(`${process.cwd()}\\test\\dir`)
     .then((res) => {
       expect(validateStats(res)).toEqual(validateStatsObject);
       done();
     })
   })
   it('debería retornar un objeto de validate&stats con la propiedad total:1, unique:1 y broken:0 con ruta de archivo', (done) => {
-    return validateLinks('./test/abc.md')
+    return validateLinks(`${process.cwd()}\\test\\abc.md`)
     .then((res) => {
       expect(validateStats(res)).toEqual({total: 1, unique: 1, broken: 0});
       done();

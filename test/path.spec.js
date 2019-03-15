@@ -5,12 +5,13 @@ describe('goThroughDirectory', () => {
         expect(typeof goThroughDirectory).toBe('function')
     });
     it('debería retornar un array de strings', () => {
-        expect(typeof goThroughDirectory('./test/dir')).toBe('object')
+        expect(typeof goThroughDirectory(`${process.cwd()}\\test\\dir`)).toBe('object')
     });
     it('debería mostrar el array de strings con las rutas de los archivos md si le mando ruta de directorio', () => {
-        expect(goThroughDirectory('./test/dir')).toEqual(['C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\abc\\archivo.md', 'C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\dir\\prueba.md'])
+        expect(goThroughDirectory(`${process.cwd()}\\test\\dir`)).toEqual([`${process.cwd()}\\test\\dir\\abc\\archivo.md`, `${process.cwd()}\\test\\dir\\prueba.md`])
     });
     it('debería mostrar el array de strings con las rutas de los archivos md si le mando ruta de archivo', () => {
-        expect(goThroughDirectory('./test/abc.md')).toEqual(['C:\\Users\\Laboratoria\\Documents\\Project_Markdown\\LIM008-fe-md-links\\test\\abc.md'])
+        expect(goThroughDirectory(`${process.cwd()}\\test\\abc.md`)).toEqual([`${process.cwd()}\\test\\abc.md`])
     })
 });
+
